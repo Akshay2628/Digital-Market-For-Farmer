@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.app.service.CategoryService;
 import com.app.service.ProductService;
@@ -32,5 +33,20 @@ public class HomeController {
 		return "shop";
 		
 	}
-
+	@GetMapping({"/shop/category/{id}"})
+	public String shopByCategory(Model model,@PathVariable int id) {
+		
+		model.addAttribute("categories",categoryService.getAllCategory());
+		model.addAttribute("products",productService.getAllProductByCategoryId(id));
+	
+		return "shop";
+	}
+	@GetMapping({"/shop/viewproduct/{id}"})
+	public String viewProduct(Model model,@PathVariable int id){
+		
+		model.addAttribute("product",productService.getProductById(id).get());
+	
+		return "viewProduct";
+	}
+	
 }

@@ -34,4 +34,5 @@ public class ProductService {
 	public List<Product> getAllProductByCategoryId(int id) {
 		return productRepository.findAllByCategory_Id(id);
 	}
+	
 }
